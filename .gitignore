@@ -30,3 +30,6 @@ build/
 
 /_site
 /docs/_site
+codeql-db
+*.sarif
+.dccache
